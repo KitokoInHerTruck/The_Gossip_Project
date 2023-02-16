@@ -1,16 +1,49 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TheGossipProject</title>
+    <title>TheGossipProjectNew</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%# <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %> 
+    <%# <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   </head>
 
-  <body>
+<header> 
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Gossip-Bar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li>
+          <a class="nav-link" <%= link_to "Home", home_path %> </a>
+        </li>
+        <li>
+          <a class="nav-link" <%= link_to "Tous les gossips", gossips_path %> </a>
+        </li>
+    
+      </ul>
+
+      <%# New %>
+      <% if !logged_in? %>
+        <form class="form-inline">
+            <a class="nav-link btn btn-primary" <%= link_to "Sign-up", new_user_path %> </a>    
+        </form>
+        <form class="form-inline">
+            <a class="nav-link btn btn-primary" <%= link_to "Sign-in", new_session_path %> </a>    
+        </form>
+      <% else %>
+        <div class="mr-3 text-success">Bienvenue <%= current_user.first_name %></div>
+        <%= button_to "Se déconnecter", session_path(session.id), method: :delete %> 
+      <% end %>
+  </nav>
+</header>
+
+  <body data-turbo-disabled="true">
     <%= yield %>
   </body>
 </html>

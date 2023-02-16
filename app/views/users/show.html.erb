@@ -1,0 +1,6 @@
+<p> First Name : </p><h2><%= @user.first_name %></h2> </br>
+<p> Last Name : </p><h2><%= @user.last_name %></h2> </br>
+<p> Email : </p><h2><%= @user.email %></h2> </br>
+<p> Age : </p><h2><%= @user.age %></h2> </br>
+<p> City : </p><h2><%= link_to @user.city.name, city_path(@user.city.id) %></h2> </br>
+<p> Description : </p><h2><%= @user.description %></h2> </br>

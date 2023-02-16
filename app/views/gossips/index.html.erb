@@ -1,0 +1,61 @@
+<style>
+.global
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+.gossip_line
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 900px;
+}
+.user_name
+{
+    width: 150px;
+}
+.gossip_title
+{
+    width: 400px;
+}
+.view_to_delete
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+a
+{
+    text-decoration: none;
+}
+</style>
+
+
+
+<div class="global">
+    <% @gossips.each do |gossip| %>
+        <div class="gossip_line">
+            <div class="user_name">
+                <h4><%= link_to gossip.user.first_name, user_path(gossip.user.id) %></h4>
+            </div>
+            <div class="gossip_title">
+                <h3><%= gossip.title %></h3>
+            </div>
+            <div class="view_to_delete">
+            <div class="view_edit">
+                    <%= link_to "VOIR", gossip_path(gossip.id), :class => "btn btn-success" %>
+                    <%= link_to "MODIFIER", edit_gossip_path(gossip.id), :class => "btn btn-primary" %>
+            </div>
+            <div class="delete">
+                    <%= button_to "SUPPRIMER", gossip_path(gossip.id), :class => "btn btn-danger", :method => :delete %>
+            </div>
+            </div>
+                    <%# &#128465; %>
+        </div>
+    <% end %>
+</div>
